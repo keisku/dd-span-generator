@@ -53,12 +53,12 @@ func main() {
 
 func generateSpanForever(ctx context.Context, logger *zap.Logger, name, spanType string) {
 	spanGenTicker := NewRandomTicker(
-		time.Millisecond*time.Duration(envVarToInt64("SPAN_INTERVAL_MIN_MS", 1000)),
-		time.Millisecond*time.Duration(envVarToInt64("SPAN_INTERVAL_MAX_MS", 10000)),
+		time.Millisecond*time.Duration(envVarToInt64("SPAN_INTERVAL_MIN", 1000)),
+		time.Millisecond*time.Duration(envVarToInt64("SPAN_INTERVAL_MAX", 10000)),
 	)
 	errGenTicker := NewRandomTicker(
-		time.Millisecond*time.Duration(envVarToInt64("ERROR_SPAN_INTERVAL_MIN_MS", 1000)),
-		time.Millisecond*time.Duration(envVarToInt64("ERROR_SPAN_INTERVAL_MAX_MS", 30000)),
+		time.Millisecond*time.Duration(envVarToInt64("ERROR_SPAN_INTERVAL_MIN", 1000)),
+		time.Millisecond*time.Duration(envVarToInt64("ERROR_SPAN_INTERVAL_MAX", 30000)),
 	)
 	for {
 		select {
