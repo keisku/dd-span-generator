@@ -5,10 +5,10 @@ COPY go.sum go.sum
 RUN go mod download
 COPY main.go main.go
 WORKDIR /workspace
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o app main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o app main.go
 
-FROM gcr.io/distroless/static:nonroot
+FROM ubuntu
 WORKDIR /
 COPY --from=builder /workspace/app .
-USER 65532:65532
+RUN apt update && apt install -yqq ca-certificates iproute2 netcat tcpdump
 ENTRYPOINT ["/app"]
