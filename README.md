@@ -14,11 +14,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: dd-span-generator
-  labels:
-    pod-label-a: pod-label-a-value
-  annotations:
-    ad.datadoghq.com/tags: '{"annotation-ad-tag-1": "annotation-ad-tag-1-value"}'
-    pod-annotation-a: pod-annotation-a-value
+  # labels:
+  #   pod-label-a: pod-label-a-value
+  # annotations:
+  #   ad.datadoghq.com/tags: '{"annotation-ad-tag-1": "annotation-ad-tag-1-value"}'
+  #   pod-annotation-a: pod-annotation-a-value
 spec:
   containers:
   - name: dd-span-generator
@@ -29,8 +29,8 @@ spec:
     env:
     - name: DD_SERVICE
       value: span-generator
-    - name: DD_ENV
-      value: keisuke-sandbox
+    # - name: DD_ENV
+    #   value: keisuke-sandbox
     - name: DD_RUNTIME_METRICS_ENABLED
       value: "true"
   volumes:
