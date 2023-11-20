@@ -39,3 +39,28 @@ spec:
     name: apmsocketpath
 EOF
 ```
+
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dd-span-generator
+spec:
+  containers:
+  - name: dd-span-generator
+    image: ghcr.io/keisku/dd-span-generator:latest
+    env:
+    - name: DD_SERVICE
+      value: span-generator
+    - name: DD_ENV
+      value: keisuke-sandbox
+    - name: DD_RUNTIME_METRICS_ENABLED
+      value: "true"
+    - name: DD_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+EOF
+```
